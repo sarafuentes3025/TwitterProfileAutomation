@@ -11,7 +11,7 @@ public class Main {
 
     var twitter = new Twitter();
     twitter.editProfileOnTwitter(driver, profilePicPath);
-
+    // TODO find a better way to wait for the picture to load
     Thread.sleep(2_000);
     driver.close();
   }
