@@ -11,6 +11,7 @@ import org.openqa.selenium.support.ui.Wait;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.time.Duration;
@@ -59,9 +60,9 @@ public class GitHub {
             By.xpath("//*[@id=\"js-pjax-container\"]/div[2]/div/div[2]/div[2]/div/div[2]/div[1]/div/div")))
         .getScreenshotAs(OutputType.FILE);
 
-    Files.copy(contributionsElement.toPath(), Paths.get("src/main/resources/contributions.png"),
+    Path file = Files.copy(contributionsElement.toPath(), Paths.get("src/main/resources/contributions.png"),
         StandardCopyOption.REPLACE_EXISTING);
 
-    return "src/main/resources/contributions.png";
+    return file.toAbsolutePath().toString();
   }
 }
