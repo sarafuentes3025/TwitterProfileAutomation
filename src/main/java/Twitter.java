@@ -15,7 +15,7 @@ import java.util.Properties;
 import static org.openqa.selenium.support.ui.ExpectedConditions.presenceOfElementLocated;
 
 public class Twitter {
-  public void editProfileOnTwitter(ChromeDriver driver, String profilePicPath) throws IOException, InterruptedException {
+  public void editProfileOnTwitter(ChromeDriver driver, String profilePicPath) throws IOException{
     driver.get("https://twitter.com/login");
 
     Wait<WebDriver> wait = new FluentWait<WebDriver>(driver)
@@ -59,7 +59,5 @@ public class Twitter {
     var savePhoto = wait.until(presenceOfElementLocated(
         By.xpath("//*[@id=\"layers\"]/div[2]/div/div/div/div/div/div[2]/div[2]/div/div[1]/div/div/div/div[3]/div/div/span/span")));
     savePhoto.click();
-
-
   }
 }
