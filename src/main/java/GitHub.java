@@ -1,3 +1,5 @@
+import net.coobird.thumbnailator.Thumbnails;
+import net.coobird.thumbnailator.geometry.Positions;
 import org.jasypt.properties.EncryptableProperties;
 import org.jasypt.util.text.StrongTextEncryptor;
 import org.openqa.selenium.By;
@@ -60,9 +62,10 @@ public class GitHub {
             By.xpath("//*[@id=\"js-pjax-container\"]/div[2]/div/div[2]/div[2]/div/div[2]/div[1]/div/div")))
         .getScreenshotAs(OutputType.FILE);
 
-    Path file = Files.copy(contributionsElement.toPath(), Paths.get("src/main/resources/contributions.png"),
-        StandardCopyOption.REPLACE_EXISTING);
+    Thumbnails.of(contributionsElement.getPath())
+        .sourceRegion(Positions.BOTTOM_RIGHT,500,200).size(640, 480)
+        .toFile("src/main/resources/edit-contributions.png");
 
-    return file.toAbsolutePath().toString();
+    return Paths.get("src/main/resources/edit-contributions.png").toAbsolutePath().toString();
   }
 }
