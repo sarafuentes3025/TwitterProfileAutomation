@@ -15,7 +15,7 @@ import java.util.Properties;
 import static org.openqa.selenium.support.ui.ExpectedConditions.presenceOfElementLocated;
 
 public class Twitter {
-  public void editProfileOnTwitter(ChromeDriver driver, String profilePicPath) throws IOException{
+  public void editProfileOnTwitter(ChromeDriver driver, String profilePicPath) throws IOException {
     driver.get("https://twitter.com/login");
 
     Wait<WebDriver> wait = new FluentWait<WebDriver>(driver)
@@ -23,11 +23,14 @@ public class Twitter {
         .pollingEvery(Duration.ofMillis(250))
         .ignoring(WebDriverException.class);
 
-    var signUpUsername = wait.until(presenceOfElementLocated(By.name("session[username_or_email]")));
+    var signUpUsername = wait.until(presenceOfElementLocated(By.name("username")));
     signUpUsername.sendKeys("@sfuentes3025");
 
+    var next = wait.until(presenceOfElementLocated(By.xpath("//*[@id=\"layers\"]/div[2]/div/div/div/div/div/div[2]/div[2]/div/div/div[2]/div[2]/div[2]/div/div/span/span")));
+    next.click();
+
     var password = wait.until(presenceOfElementLocated(
-        By.xpath("//*[@id=\"react-root\"]/div/div/div[2]/main/div/div/div[2]/form/div/div[2]/label/div/div[2]/div/input")));
+        By.name("password")));
 
     var encryptor = new StrongTextEncryptor();
     encryptor.setPassword(System.getProperty("masterPassword"));
@@ -36,9 +39,9 @@ public class Twitter {
     props.load(new FileInputStream("src/main/resources/application.properties"));
     password.sendKeys(props.getProperty("t.pass"));
 
-    var signIn = wait.until(presenceOfElementLocated(
-        By.xpath("//*[@id=\"react-root\"]/div/div/div[2]/main/div/div/div[2]/form/div/div[3]/div/div/span/span")));
-    signIn.click();
+    var logIn = wait.until(presenceOfElementLocated(By.xpath("//*[@id=\"layers\"]/div[2]/div/div/div/div/div/div[2]/div[2]/div/div/div[2]/div[2]/div[2]/div/div/span/span")));
+    logIn.click();
+
 
     var profileButton = wait.until(presenceOfElementLocated(
         By.xpath("//*[@id=\"react-root\"]/div/div/div[2]/header/div/div/div/div[1]/div[2]/nav/a[7]")));
