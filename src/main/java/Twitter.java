@@ -56,11 +56,11 @@ public class Twitter {
     addPhoto.sendKeys(profilePicPath);
 
     var apply = wait.until(presenceOfElementLocated(
-        By.xpath("//*[@id=\"layers\"]/div[2]/div[2]/div/div/div/div/div[2]/div[2]/div/div[1]/div/div/div/div[3]/div/div/span/span")));
+        By.xpath("//span[contains(text(),'Apply')]")));
     apply.click();
 
     var savePhoto = wait.until(presenceOfElementLocated(
-        By.xpath("//*[@id=\"layers\"]/div[2]/div/div/div/div/div/div[2]/div[2]/div/div[1]/div/div/div/div[3]/div/div/span/span")));
+        By.xpath("//span[contains(text(),'Save')]")));
     savePhoto.click();
   }
 }
